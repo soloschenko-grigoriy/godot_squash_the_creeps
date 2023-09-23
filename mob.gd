@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var min_speed: int = 10
 @export var max_speed: int = 18
 
+signal squashed
+
 func  _physics_process(delta):
 	move_and_slide()
 	
@@ -16,3 +18,8 @@ func initialize(start_position: Vector3, player_position: Vector3):
 
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	queue_free()
+	
+func squash():
+	squashed.emit()
+	queue_free()
+	

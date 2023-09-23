@@ -5,6 +5,8 @@ extends CharacterBody3D
 @export var jump_impluse = 20
 @export var bounce_impulse = 16
 
+signal hit
+
 var target_velocity: Vector3 = Vector3.ZERO
 
 func _physics_process(delta):
@@ -47,3 +49,10 @@ func _physics_process(delta):
 				
 	move_and_slide()
 	
+func die():
+	hit.emit()
+	queue_free()
+
+
+func _on_mob_detector_body_entered(body):
+	die() # Replace with function body.
